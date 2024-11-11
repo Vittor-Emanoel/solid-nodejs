@@ -1,4 +1,4 @@
-import { PrismaUsersRepository } from "@/repositories/prisma-users-repository";
+import { IUsersRepository } from "@/repositories/IUsersRepository";
 import { hash } from "bcryptjs";
 
 interface IRegisterUseCaseRequest {
@@ -8,7 +8,7 @@ interface IRegisterUseCaseRequest {
 }
 
 export class RegisterUseCase {
-  constructor(private usersRepository: PrismaUsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
   async execute({ name, email, password }: IRegisterUseCaseRequest) {
     const password_hash = await hash(password, 6);
