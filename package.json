@@ -18,11 +18,13 @@
     "@typescript-eslint/parser": "8.13.0",
     "eslint": "9.14.0",
     "lint-staged": "15.2.10",
+    "prisma": "5.22.0",
     "tsup": "8.3.5",
     "tsx": "4.19.2",
     "typescript": "5.6.3"
   },
   "dependencies": {
+    "@prisma/client": "5.22.0",
     "dotenv": "16.4.5",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.2.1",
