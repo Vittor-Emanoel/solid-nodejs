@@ -4,7 +4,7 @@ import { InvalidCredentialErrors } from "@/use-cases/errors/invalid-credentials-
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function authenticateController(
+export async function authenticate(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
