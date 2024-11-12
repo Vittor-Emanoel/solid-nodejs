@@ -4,15 +4,12 @@ import { describe, expect, it } from "vitest";
 import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
 import { RegisterUseCase } from "./register";
 
-// Units test
-// nao toca em banco de dados, nao toca em camadas externas
-
 describe("Register Use case", () => {
   it("should be able to register", async () => {
     const usersRepository = new InMemoryUserRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const sut = new RegisterUseCase(usersRepository);
 
-    const { user } = await registerUseCase.execute({
+    const { user } = await sut.execute({
       name: "John doe",
       email: "vittor@email.com",
       password: "123456",
@@ -40,18 +37,18 @@ describe("Register Use case", () => {
 
   it("should not be able to register with same email twice", async () => {
     const usersRepository = new InMemoryUserRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const sut = new RegisterUseCase(usersRepository);
 
     const email = "vittor@email.com";
 
-    await registerUseCase.execute({
+    await sut.execute({
       name: "John doe",
       email: email,
       password: "123456",
     });
 
     await expect(() =>
-      registerUseCase.execute({
+      sut.execute({
         name: "John doe",
         email: email,
         password: "123456",
