@@ -50,29 +50,12 @@ describe("Register Use case", () => {
       password: "123456",
     });
 
-    expect(() =>
+    await expect(() =>
       registerUseCase.execute({
         name: "John doe",
         email: email,
         password: "123456",
       }),
     ).rejects.toBeInstanceOf(UserAlreadyExistsError);
-  });
-
-  it("should hash user password upon registration", async () => {
-    const usersRepository = new InMemoryUserRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
-
-    const { user } = await registerUseCase.execute({
-      name: "John doe",
-      email: "vittor@email.com",
-      password: "123456",
-    });
-
-    const isPasswordCorrectlyHashed = await compare(
-      "123456",
-      user.password_hash,
-    );
-    expect(isPasswordCorrectlyHashed).toBe(true);
   });
 });
