@@ -28,10 +28,10 @@ describe("Authenticate Use case", () => {
     expect(user.id).toEqual(expect.any(String));
   });
 
-  it("should note be able to authenticate with wrong email", async () => {
+  it("should not be able to authenticate with wrong email", async () => {
     await expect(() =>
       sut.execute({
-        email: "vittor3232@email.com",
+        email: "faker@email.com",
         password: "123456",
       }),
     ).rejects.toBeInstanceOf(InvalidCredentialErrors);

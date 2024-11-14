@@ -11,8 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ui":"vitest --ui",
-    "prepare": "husky"
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "vittor",
@@ -35,6 +34,7 @@
   "dependencies": {
     "@prisma/client": "5.22.0",
     "bcryptjs": "2.4.3",
+    "dayjs": "1.11.13",
     "dotenv": "16.4.5",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.2.1",
