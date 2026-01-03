@@ -1,33 +1,71 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma, User } from "@prisma/client";
-import { IUsersRepository } from "../IUsersRepository";
+import type { CheckIn, Prisma } from "@prisma/client";
+import dayjs from "dayjs";
+import type { ICheckInsRepository } from "../ICheckInsRepository";
 
-export class PrismaCheckInRepository implements IUsersRepository {
-  async create(data: Prisma.UserCreateInput) {
-    const user = await prisma.user.create({
+export class PrismaCheckInRepository implements ICheckInsRepository {
+  async countByUserId(userId: string) {
+    const count = await prisma.checkIn.count({
+      where: {
+        user_id: userId,
+      },
+    });
+
+    return count;
+  }
+
+  async create(data: Prisma.CheckInUncheckedCreateInput) {
+    const checkIn = await prisma.checkIn.create({
       data,
     });
 
-    return user;
+    return checkIn;
   }
 
-  async findByEmail(email: string) {
-    const user = await prisma.user.findUnique({
+  async findById(id: string) {
+    const checkIn = await prisma.checkIn.findUnique({
+      where: { id },
+    });
+
+    return checkIn;
+  }
+
+  async findByUserIdOnDate(userId: string, date?: Date) {
+    const startOfTheDay = dayjs(date).startOf("date");
+    const endOfTheDay = dayjs(date).endOf("date");
+
+    const checkIn = await prisma.checkIn.findFirst({
       where: {
-        email,
+        user_id: userId,
+        created_at: {
+          gte: startOfTheDay.toDate(),
+          lte: endOfTheDay.toDate(),
+        },
       },
     });
 
-    return user;
+    return checkIn;
   }
 
-  async findById(id: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({
+  async findManyByUserId(userId: string, page: number) {
+    const checkIns = await prisma.checkIn.findMany({
       where: {
-        id,
+        user_id: userId,
+      },
+      take: 20,
+      skip: (page - 1) * 20,
+    });
+    return checkIns;
+  }
+
+  async save(data: CheckIn) {
+    const checkIn = await prisma.checkIn.update({
+      data: data,
+      where: {
+        id: data.id,
       },
     });
 
-    return user;
+    return checkIn;
   }
 }
