@@ -17,12 +17,10 @@
   "author": "vittor",
   "license": "ISC",
   "devDependencies": {
+    "@biomejs/biome": "2.3.11",
     "@types/bcryptjs": "2.4.6",
     "@types/node": "22.9.0",
-    "@typescript-eslint/eslint-plugin": "8.13.0",
-    "@typescript-eslint/parser": "8.13.0",
     "@vitest/coverage-v8": "2.1.4",
-    "eslint": "9.14.0",
     "lint-staged": "15.2.10",
     "prisma": "5.22.0",
     "tsup": "8.3.5",
