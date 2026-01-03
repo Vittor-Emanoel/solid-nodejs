@@ -40,7 +40,7 @@ export class InMemoryGymsRepository implements IGymsRepository {
       .slice((page - 1) * 20, page * 20);
   }
 
-  async searchManyNearBy(params: IFindManyNearbyParams): Promise<Gym[]> {
+  async findManyNearBy(params: IFindManyNearbyParams): Promise<Gym[]> {
     return this.items.filter((item) => {
       const distance = getDistanceBetweenCoordinates(
         {
