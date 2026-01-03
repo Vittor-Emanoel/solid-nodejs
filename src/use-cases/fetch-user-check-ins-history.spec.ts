@@ -47,7 +47,6 @@ describe("Fetch User Check-in history Use case", () => {
       page: 2,
     });
 
-    console.log(checkIns);
     expect(expect);
     expect(checkIns).toHaveLength(2);
     expect(checkIns).toEqual([
